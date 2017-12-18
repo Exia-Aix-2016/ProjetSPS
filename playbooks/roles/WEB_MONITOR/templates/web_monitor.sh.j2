@@ -1,0 +1,31 @@
+#!/bin/bash
+
+SERVER_IP={{ server_ip }}
+WEBSITE_URL={{ website_url }}
+
+ping -c 3 $SERVER_IP > /dev/null
+OUT=$?
+if [ $OUT == 0 ]; then
+    SERVER_STATUS="reachable"
+else
+    SERVER_STATUS="unreachable"
+fi
+
+WEBSITE_RESPONSE_TIME=$(curl -o /dev/null -s -w %{time_total} $WEBSITE_URL)
+OUT=$?
+if [ $OUT == 0 ]; then
+    WEBSITE_STATUS="reachable"
+else
+    WEBSITE_STATUS="unreachable"
+    WEBSITE_RESPONSE_TIME=-1
+fi
+
+if [ $(dig +short $WEBSITE_URL | wc -w) -gt 0 ]; then
+    DNS_STATUS="resolved"
+else
+    DNS_STATUS="unresolved"
+fi
+
+DATE=$(date +"%D %T")
+
+echo "$DATE,$SERVER_STATUS,$DNS_STATUS,$WEBSITE_STATUS,$WEBSITE_RESPONSE_TIME" >> web_monitor.log.csv
