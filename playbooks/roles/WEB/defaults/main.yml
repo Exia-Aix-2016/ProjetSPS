@@ -4,11 +4,12 @@ listened_port_gnutls: 443
 
 websites:
 - ip_internet: 10.50.50.1
-  ip_intranet: 192.168.10.10
+  ip_intranet: 192.168.10.7
   doc_root: "/www/carnofluxe.website"
   name_server: www.carnofluxe.fr
   name_local: carnofluxe.fr
-- ip_intranet: 192.168.10.10
+- ip_internet:
+  ip_intranet: 192.168.10.7
   doc_root: "/www/carnofluxe.local"
   name_server: "http://supervision.carnofluxe.local"
   name_local: "http://supervision.carnofluxe.local"
