@@ -1,10 +1,10 @@
 
 # option definitions common to all supported networks...
 option domain-name "{{ domain }}";
-option domain-name-servers 8.8.8.8, 8.8.4.4;
+option domain-name-servers {{ dns_primary }}, {{ dns_secondary }};
 
-default-lease-time 3600;
-max-lease-time 7200;
+default-lease-time {{ lease_time_default }};
+max-lease-time {{ lease_time_max }};
 
 # The ddns-updates-style parameter controls whether or not the server will
 # attempt to do a DNS update when a lease is confirmed. We default to the
@@ -12,16 +12,11 @@ max-lease-time 7200;
 # have support for DDNS.)
 ddns-update-style none;
 
-
-
-
-# A slightly different configuration for an internal subnet.
-
-subnet 192.168.137.0 netmask 255.255.255.0{
-  range 192.168.137.5 192.168.137.70;
-  option domain-name-servers 8.8.8.8, 8.8.4.4;
+subnet {{ subnet }} netmask {{ netmask }}{
+  range {{ range_min }} {{ range_max }};
+  option domain-name-servers {{ dns_primary }}, {{ dns_secondary }};
   option domain-name "{{ domain }}";
-  option routers 192.168.137.1;
+  option routers {{ router }};
 #  option broadcast-address 10.5.5.31;
 #  default-lease-time 600;
 #  max-lease-time 7200;
