@@ -1,6 +1,7 @@
 Vagrant.configure("2") do |config|
 
   config.vm.box = "generic/debian9"
+  config.vm.hostname = "SysAdmin"
 
   # Sync playbooks folder accross vm and host
   config.vm.synced_folder "playbooks/", "/home/vagrant/playbooks"
