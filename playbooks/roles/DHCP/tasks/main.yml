@@ -5,7 +5,7 @@
 
   - name: Configuration service DHCP(1/2).
     become: yes
-    template: src=/templates/dhcpd.conf.j2 dest=/etc/dhcp/dhcpd.conf
+    template: src=templates/dhcpd.conf.j2 dest=/etc/dhcp/dhcpd.conf
 
   - name: Configuration service DHCP(2/2).
     become: yes
