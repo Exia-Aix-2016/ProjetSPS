@@ -3,8 +3,16 @@
     become: yes
     cron: minute={{ minute }} hour={{ hour }} weekday={{ weekday }}
     name="Backup maket website (every weeks)"
-    cron_file= "websiteBackup"
+    cron_file= "websiteBackupWeek"
     user="vagrant"
-    job""
+    job=""
+
+  - name: Create monthly backup
+    become: yes
+    cron: minute={{ minute }} hour={{ hour }} special_time=monthly
+    name="Backup maket website (every month)"
+    cron_file= "websiteBackupMonth"
+    user="vagrant"
+    job=""
 
 ...
