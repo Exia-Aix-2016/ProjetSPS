@@ -22,7 +22,7 @@
   roles:
     - DNS_AUX
 #--------------INSTALLATION serveur web--------------
-- hosts: web
+- hosts: WEB
   remote_user: vagrant
   #tasks:
   roles:
