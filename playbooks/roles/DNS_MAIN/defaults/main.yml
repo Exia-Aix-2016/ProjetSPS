@@ -1,0 +1,23 @@
+#DNS_MAIN Variable
+
+#---- FORWARDING DNS ----
+dns_forward_first: 8.8.8.8
+dns_forward_second: 8.8.4.4
+
+#---- NAME DNS ----
+name_dns_first: ns1
+name_dns_second: ns2
+
+name_zone: carnofluxe.local
+
+#---- SUBNETING ----
+subnet_ip_mask: 192.168.10.0/24
+subnet_reverse_ip: 10.168.19
+
+#---- IP ----
+ip_dns_first: 192.168.10.5
+ip_dns_second: 192.168.10.6
+ip_webServer: 192.168.10.7
+last_ip_digit_dns_first: 5
+last_ip_digit_dns_second: 6
+last_ip_digit_dns_webserver: 7

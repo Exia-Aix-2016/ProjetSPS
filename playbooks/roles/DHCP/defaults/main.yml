@@ -1,5 +1,5 @@
-dns_primary: 8.8.8.8
-dns_secondary: 8.8.4.4
+dns_primary: 192.168.10.5
+dns_secondary: 192.168.10.6
 
 lease_time_default: 3600
 lease_time_max: 7200

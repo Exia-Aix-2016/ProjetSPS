@@ -1,3 +1,31 @@
 ---
+  #---- INSTALLATION DNS BIND9 ----
+  - name: Installation service DNS bind9
+    become: yes
+    apt: name=bind9 state=latest update_cache=yes
 
+#STEP1 CONFIG DNS options
+  - name: Configuration service DNS principal - named.conf.options (1/3).
+    become: yes
+    template: src=templates/named.conf.options.j2 dest=/etc/bind/named.conf.options
+
+#STEP2 CONFIG DNS zone
+  - name: Configuration des zones DNS principal - named.conf.local (2/3).
+    become: yes
+    template: src=templates/named.conf.local.j2 dest=/etc/bind/named.conf.local
+
+#STEP3 CONFIG DNS zone
+  - name: Configuration des zones DNS principal - db.{{ name_zone }} (3/4).
+    become: yes
+    template: src=templates/db.{{ name_zone }}.j2 dest=/etc/bind/db.{{ name_zone }}
+
+#STEP4 CONFIG DNS reversing
+  - name: Configuration du reversing DNS principal - db.{{ name_zone }}.inv (4/4).
+    become: yes
+    template: src=templates/db.{{ name_zone }}.inv.j2 dest=/etc/bind/db.{{ name_zone }}.inv
+
+#STEP5 CONFIG DNS reboot 
+  - name: Restart service DNS bind9.
+    become: yes
+    service: name=bind9 state=restarted
 ...
