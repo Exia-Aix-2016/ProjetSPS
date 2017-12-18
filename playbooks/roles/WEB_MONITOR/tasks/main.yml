@@ -1,0 +1,14 @@
+---
+  - name: Installation tools.
+    become: yes
+    apt: name=dnsutils state=latest update_cache=yes 
+  - name: Adding script
+    template: src=templates/web_monitor.sh.j2 dest=/home/vagrant/web_monitor.sh
+  - name: Changing perm of "web_monitor.sh, adding "+x"
+    become: true
+    file: dest=/home/vagrant/web_monitor.sh mode=a+x
+  - name: Adding script to cron
+    cron:
+      name: "web_monitor"
+      job: "/home/vagrant/web_monitor.sh"
+...
