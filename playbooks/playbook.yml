@@ -1,0 +1,32 @@
+---
+#--------------INSTALLATION DHCP--------------
+- hosts: DHCP
+  remote_user: vagrant
+  vars:
+    - domain: carnofluxe.local
+    - interface: eth0
+  #tasks:
+  roles:
+    - DHCP
+#--------------INSTALLATION DNS Principal--------------
+- hosts: DNS_MAIN
+  remote_user: vagrant
+  vars:
+  #tasks:
+  roles:
+    - DNS_MAIN
+#--------------INSTALLATION DNS secondaire--------------
+- hosts: DNS_AUX
+  remote_user: vagrant
+  vars:
+  #tasks:
+  roles:
+    - DNS_AUX
+#--------------INSTALLATION serveur web--------------
+- hosts: web
+  remote_user: vagrant
+  vars:
+  #tasks:
+  roles:
+    - WEB
+...
