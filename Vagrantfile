@@ -3,10 +3,10 @@ Vagrant.configure("2") do |config|
   config.vm.box = "generic/debian9"
 
   # Sync playbooks folder accross vm and host
-  config.vm.synced_folder "./playbooks/", "/home/vagrant/playbooks"
+  config.vm.synced_folder "playbooks/", "/home/vagrant/playbooks"
 
   # Sync vms folder accross vm and host
-  config.vm.synced_folder "./vms/", "/home/vagrant/vms", create: true
+  config.vm.synced_folder "vms/", "/home/vagrant/vms", create: true
 
   # Generate ssh keys
   config.vm.provision "shell", 
