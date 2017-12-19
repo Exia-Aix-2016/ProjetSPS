@@ -13,7 +13,7 @@
 
   - name: Copy the market website.
     become: yes
-    copy: src=index.html dest=/etc/apache2/{{ website[0].name_serveur }}
+    copy: src=index.html dest=/etc/apache2/{{ websites[0].name_server }}
 
   - name: Start service HTTP.
     become: yes
