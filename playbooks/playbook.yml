@@ -43,6 +43,7 @@
   roles:
     - HTTP_SERVER
     - HTTP_LOGGER
+    - HTML_BUILDER
     #- BACKUP
 
 #--------------Add Carnofluxe DNS-------------------------
