@@ -1,13 +1,13 @@
 ---
-  - name: Installation service HTTP.
+  - name: Installation HTTP_SERVER.
     become: yes
     apt: name=apache2 state=latest update_cache=yes
 
-  - name: Configuration service HTTP (1/2).
+  - name: Configuration HTTP_SERVER (1/2).
     become: yes
     template: src=templates/apache2.conf.j2 dest=/etc/apache2/apache2.conf
 
-  - name: Configuration service HTTP (2/2).
+  - name: Configuration HTTP_SERVER (2/2).
     become: yes
     template: src=templates/ports.conf.j2 dest=/etc/apache2/ports.conf
 
@@ -15,7 +15,7 @@
     become: yes
     copy: src=index.html dest=/etc/apache2/{{ websites[0].name_server }}
 
-  - name: Start service HTTP.
+  - name: Start HTTP_SERVER.
     become: yes
     service: name=apache2 state=restarted
  
