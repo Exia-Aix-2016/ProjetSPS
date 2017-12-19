@@ -1,6 +1,6 @@
 ---
-#--------------INSTALLATION DHCP--------------
-- hosts: DHCP
+#--------------INSTALLATION PRIMARYINFRA--------------
+- hosts: PRIMARYINFRA
   remote_user: vagrant
   vars:
     - domain: carnofluxe.local
@@ -8,22 +8,19 @@
   #tasks:
   roles:
     - DHCP
-    - WEB_MONITOR
-#--------------INSTALLATION DNS Principal--------------
-- hosts: DNS_MAIN
-  remote_user: vagrant
-  #tasks:
-  roles:
-    - DNS_MAIN
-#--------------INSTALLATION DNS secondaire--------------
-- hosts: DNS_AUX
-  remote_user: vagrant
+    - DNS
 
+#--------------INSTALLATION SECONDARYINFRA--------------
+- hosts: SECONDARYINFRA
+  remote_user: vagrant
   #tasks:
   roles:
-    - DNS_AUX
+    - DNS_SLAVE
+    - SUPERVISOR
+    #- BACKUP_SERVER
+
 #--------------INSTALLATION serveur web--------------
-- hosts: WEB
+- hosts: WEBSERVICE
   remote_user: vagrant
   tasks:
     - name: Add ssh key of monitor
@@ -32,5 +29,7 @@
         state: present
         key: "{{ lookup('file', '~/web_monitor_rsa.pub') }}"
   roles:
-    - WEB
+    - HTTP_SERVER
+    #- HTTP_LOGGER
+    - BACKUP
 ...
