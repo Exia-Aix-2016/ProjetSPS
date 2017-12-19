@@ -1,0 +1,14 @@
+---
+  - name: Adding script
+    template: src=templates/http_logger.sh.j2 dest=/home/vagrant/http_logger.sh
+
+  - name: Changing perm of "http_logger.sh, adding "+x"
+    become: true
+    file: dest=/home/vagrant/http_logger.sh mode=a+x
+  
+  - name: Adding script to cron
+    cron:
+      name: "http_logger"
+      minute: "0"
+      job: "/home/vagrant/http_logger.sh"
+...

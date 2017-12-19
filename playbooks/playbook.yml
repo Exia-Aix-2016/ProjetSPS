@@ -42,7 +42,7 @@
         key: "{{ lookup('file', '~/supervisor_rsa.pub') }}"
   roles:
     - HTTP_SERVER
-    #- HTTP_LOGGER
+    - HTTP_LOGGER
     #- BACKUP
 
 #--------------Add Carnofluxe DNS-------------------------

@@ -7,7 +7,9 @@ websites:
   ip_intranet: 192.168.10.10
   name_server: carnofluxe.fr
   name_local: carnofluxe.local
+  log: True
 - ip_internet:
   ip_intranet: 192.168.10.10
   name_server: supervisor.carnofluxe.local
   name_local: supervisor.carnofluxe.local
+  log: False

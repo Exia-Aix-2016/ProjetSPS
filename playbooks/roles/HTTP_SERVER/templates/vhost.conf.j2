@@ -3,5 +3,7 @@
     ServerName {{ item.name_server }}
     ServerAlias {{ item.name_local }}
     ErrorLog ${APACHE_LOG_DIR}/error.log
+    {% if item.log %}
     CustomLog ${APACHE_LOG_DIR}/access.log combined
+    {% endif %}
 </VirtualHost>

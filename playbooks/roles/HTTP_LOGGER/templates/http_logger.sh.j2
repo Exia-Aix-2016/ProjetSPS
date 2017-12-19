@@ -1,0 +1,20 @@
+#!/bin/bash
+
+DATE=$(date -d "1 hour ago"  +"%d/%b/%Y:%H:")
+echo -n > ~/http_logs.csv
+
+while read -r line
+do
+    IP=$(echo $line | awk '{ print $1  }')
+    DATE=$(echo $line | awk '{ print substr($4,2,length($4)-1) }')
+    CSV=$(curl -s ip-api.com/csv/$IP)
+
+    if [ $(echo $CSV | awk -F "," '{ print $1 }') == "success" ]; then
+        COUNTRY=$(echo $CSV | awk -F "," '{ print $2 }')
+    else
+        COUNTRY="Internal"
+    fi
+
+    echo "$DATE,$IP,$COUNTRY" >> ~/http_logs.csv
+
+done < <(sudo grep "$DATE" /var/log/apache2/access.log)
