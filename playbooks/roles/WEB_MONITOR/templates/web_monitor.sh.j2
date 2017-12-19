@@ -29,3 +29,5 @@ fi
 DATE=$(date +"%D %T")
 
 echo "$DATE,$SERVER_STATUS,$DNS_STATUS,$WEBSITE_STATUS,$WEBSITE_RESPONSE_TIME" >> web_monitor.log.csv
+
+scp web_monitor.log.csv vagrant@$SERVER_IP:~/
