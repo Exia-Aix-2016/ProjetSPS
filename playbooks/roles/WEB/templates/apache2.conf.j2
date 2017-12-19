@@ -98,6 +98,22 @@ Include ports.conf
         Require all granted
 </Directory>
 
+<Directory /var/www/www.carnofluxe.fr>
+        Options Indexes FollowSymLinks
+        AllowOverride None
+        Require all granted
+        Order allow,deny
+        Allow from localhost carnofluxe.fr
+</Directory>
+
+<Directory /var/www/http://supervision.carnofluxe.local>
+        Options Indexes FollowSymLinks
+        AllowOverride None
+        Require all granted
+        Order allow,deny
+        Allow from localhost
+</Directory>
+
 #<Directory /srv/>
 #       Options Indexes FollowSymLinks
 #       AllowOverride None
