@@ -1,4 +1,16 @@
 ---
+#--------------Add Google DNS-------------------------
+- hosts: all
+  remote_user: vagrant
+  vars:
+    - dns:
+      - 8.8.8.8
+      - 8.8.4.4
+  tasks:
+    - name: Configuration DNS.
+      become: yes
+      template: src=templates/resolv.conf.j2 dest=/etc/resolv.conf
+
 #--------------INSTALLATION PRIMARYINFRA--------------
 - hosts: PRIMARYINFRA
   remote_user: vagrant
@@ -32,4 +44,16 @@
     - HTTP_SERVER
     #- HTTP_LOGGER
     #- BACKUP
+
+#--------------Add Carnofluxe DNS-------------------------
+- hosts: all
+  remote_user: vagrant
+  vars:
+    - dns:
+      - 192.168.10.5
+      - 192.168.10.6
+  tasks:
+    - name: Configuration DNS.
+      become: yes
+      template: src=templates/resolv.conf.j2 dest=/etc/resolv.conf
 ...
