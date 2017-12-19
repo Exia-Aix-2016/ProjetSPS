@@ -11,9 +11,16 @@
     become: yes
     template: src=templates/ports.conf.j2 dest=/etc/apache2/ports.conf
 
+  - name: Create website directory
+    become: yes
+    file:
+      path: /var/www/{{ item.name_server }}
+      state: directory
+    with_items: "{{ websites }}"
+
   - name: Copy the market website.
     become: yes
-    copy: src=index.html dest=/etc/apache2/{{ websites[0].name_server }}
+    copy: src=index.html dest=/var/www/{{ websites[0].name_server }}/index.html
 
   - name: Start HTTP_SERVER.
     become: yes

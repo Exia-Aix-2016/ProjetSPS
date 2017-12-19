@@ -6,7 +6,7 @@ Listen {{ listened_port_default }}
 
 {% for website in websites %}
 <VirtualHost {{ website.ip_intranet }} {{ website.ip_internet }}>
-    DocumentRoot {{ website.doc_root }}
+    DocumentRoot /var/www/{{ website.name_server }}
     ServerName {{ website.name_server }}
     ServerAlias {{ website.name_local }}
 </VirtualHost>
