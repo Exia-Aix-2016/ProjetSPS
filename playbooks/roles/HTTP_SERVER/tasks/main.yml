@@ -3,13 +3,26 @@
     become: yes
     apt: name=apache2 state=latest update_cache=yes
 
-  - name: Configuration HTTP_SERVER (1/2).
+  - name: Configuration HTTP_SERVER (1/4).
     become: yes
     template: src=templates/apache2.conf.j2 dest=/etc/apache2/apache2.conf
 
-  - name: Configuration HTTP_SERVER (2/2).
+  - name: Configuration HTTP_SERVER (2/4).
     become: yes
     template: src=templates/ports.conf.j2 dest=/etc/apache2/ports.conf
+
+  - name: Configuration HTTP_SERVER (3/4).
+    become: yes
+    template: src=templates/vhost.conf.j2 dest=/etc/apache2/sites-available/{{ item.name_server }}.conf
+    with_items: "{{ websites }}"
+
+  - name: Configuration HTTP_SERVER (4/4).
+    become: yes
+    file:
+      src: /etc/apache2/sites-available/{{ item.name_server }}.conf
+      dest: /etc/apache2/sites-enabled/{{ item.name_server }}.conf
+      state: link
+    with_items: "{{ websites }}"
 
   - name: Create website directory
     become: yes

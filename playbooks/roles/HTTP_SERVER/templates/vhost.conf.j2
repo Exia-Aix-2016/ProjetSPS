@@ -1,0 +1,7 @@
+<VirtualHost {{ item.ip_intranet }} {{ item.ip_internet }}>
+    DocumentRoot /var/www/{{ item.name_server }}
+    ServerName {{ item.name_server }}
+    ServerAlias {{ item.name_local }}
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
