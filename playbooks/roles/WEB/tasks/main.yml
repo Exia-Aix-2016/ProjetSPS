@@ -11,6 +11,10 @@
     become: yes
     template: src=templates/ports.conf.j2 dest=/etc/apache2/ports.conf
 
+  - name: Copy the market website.
+    become: yes
+    copy: src=index.html dest=/etc/apache2/{{ website[0].name_serveur }}
+
   - name: Start service HTTP.
     become: yes
     service: name=apache2 state=restarted
