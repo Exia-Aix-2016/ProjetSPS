@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SERVER_IP={{ server_ip }}
+SERVER_IP={{ webservice_ip }}
 WEBSITE_URL={{ website_url }}
 
 ping -c 3 $SERVER_IP > /dev/null
@@ -28,6 +28,6 @@ fi
 
 DATE=$(date +"%D %T")
 
-echo "$DATE,$SERVER_STATUS,$DNS_STATUS,$WEBSITE_STATUS,$WEBSITE_RESPONSE_TIME" >> web_monitor.log.csv
+echo "$DATE,$SERVER_STATUS,$DNS_STATUS,$WEBSITE_STATUS,$WEBSITE_RESPONSE_TIME" >> supervisor.log.csv
 
-scp web_monitor.log.csv vagrant@$SERVER_IP:~/
+scp supervisor.log.csv vagrant@$SERVER_IP:~/

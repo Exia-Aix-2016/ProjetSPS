@@ -23,11 +23,11 @@
 - hosts: WEBSERVICE
   remote_user: vagrant
   tasks:
-    - name: Add ssh key of monitor
+    - name: Add ssh key of supervisor
       authorized_key:
         user: vagrant
         state: present
-        key: "{{ lookup('file', '~/web_monitor_rsa.pub') }}"
+        key: "{{ lookup('file', '~/supervisor_rsa.pub') }}"
   roles:
     - HTTP_SERVER
     #- HTTP_LOGGER
