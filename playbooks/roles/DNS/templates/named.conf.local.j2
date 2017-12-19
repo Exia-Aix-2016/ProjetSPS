@@ -10,11 +10,11 @@ zone "{{ name_zone }}" {
         type master;
         notify yes;
         file "/etc/bind/db.{{ name_zone }}";
-        allow-transfer { {{ ip_SecondaryInfra }}; };
+        allow-transfer { {{ ip_secondaryinfra }}; };
 };
 
 zone "{{ subnet_reverse_ip }}.in-addr.arpa"{
         type master;
         file "/etc/bind/db.{{ name_zone }}.inv";
-        allow-transfer { {{ ip_SecondaryInfra }}; };
+        allow-transfer { {{ ip_secondaryinfra }}; };
 };

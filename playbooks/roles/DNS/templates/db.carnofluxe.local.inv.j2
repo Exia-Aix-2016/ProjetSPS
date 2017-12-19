@@ -10,6 +10,6 @@ $ORIGIN {{ subnet_reverse_ip }}.in-addr.arpa.
 
 @               IN      NS        {{ name_dns_first }}.{{ name_zone }}.
 @               IN      NS        {{ name_dns_second }}.{{ name_zone }}.
-{{ last_ip_digit_PrimaryInfra }}               IN      PTR       {{ name_dns_first }}.{{ name_zone }}.
-{{ last_ip_digit_SecondaryInfra }}              IN      PTR       {{ name_dns_second }}.{{ name_zone }}.
-{{ last_ip_digit_dns_webService }}              IN      PTR       {{ name_zone }}.
+{{ last_ip_digit_primaryinfra }}               IN      PTR       {{ name_dns_first }}.{{ name_zone }}.
+{{ last_ip_digit_secondaryinfra }}              IN      PTR       {{ name_dns_second }}.{{ name_zone }}.
+{{ last_ip_digit_dns_webservice }}              IN      PTR       {{ name_zone }}.

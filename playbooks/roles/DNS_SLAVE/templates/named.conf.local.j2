@@ -9,5 +9,5 @@
 zone "{{ name_zone }}" {
         type slave;
         file "/var/cache/bind/db.{{ name_zone }}";
-        masters { {{ ip_PrimaryInfra }}; };
+        masters { {{ ip_primaryinfra }}; };
 };
