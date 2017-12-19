@@ -1,18 +1,14 @@
 ---
-  - name: Create weekly backup ever Tuesday
-    become: yes
-    cron: minute={{ minute }} hour={{ hour }} weekday={{ weekday }}
-    name="Backup maket website (every weeks)"
-    cron_file= "websiteBackupWeek"
-    user="vagrant"
-    job=""
+- name: Install backup script
+  template: src=templates/backup.sh.j2 dest=/home/vagrant/backup.sh
 
-  - name: Create monthly backup
-    become: yes
-    cron: minute={{ minute }} hour={{ hour }} special_time=monthly
-    name="Backup maket website (every month)"
-    cron_file= "websiteBackupMonth"
-    user="vagrant"
-    job=""
+- name: Changing perm of "backup.sh, adding "+x"
+  become: yes
+  file: dest=/home/vagrant/backup.sh mode=a+x
 
+- name: Adding script backup.sh
+  cron:
+    name: "backup"
+    special_time: weekly
+    job: "/home/vagrant/backup.sh"
 ...

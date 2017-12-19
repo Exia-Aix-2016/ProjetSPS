@@ -44,7 +44,7 @@
     - HTTP_SERVER
     - HTTP_LOGGER
     - HTML_BUILDER
-    #- BACKUP
+    - BACKUP
 
 #--------------Add Carnofluxe DNS-------------------------
 - hosts: all
