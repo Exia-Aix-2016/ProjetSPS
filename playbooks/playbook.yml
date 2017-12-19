@@ -8,6 +8,7 @@
   #tasks:
   roles:
     - DHCP
+    - WEB_MONITOR
 #--------------INSTALLATION DNS Principal--------------
 - hosts: DNS_MAIN
   remote_user: vagrant
@@ -24,7 +25,12 @@
 #--------------INSTALLATION serveur web--------------
 - hosts: WEB
   remote_user: vagrant
-  #tasks:
+  tasks:
+    - name: Add ssh key of monitor
+      authorized_key:
+        user: vagrant
+        state: present
+        key: "{{ lookup('file', '~/web_monitor_rsa.pub') }}"
   roles:
     - WEB
 ...
