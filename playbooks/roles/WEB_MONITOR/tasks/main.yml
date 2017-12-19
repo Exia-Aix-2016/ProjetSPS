@@ -2,11 +2,29 @@
   - name: Installation tools.
     become: yes
     apt: name=dnsutils state=latest update_cache=yes 
+
   - name: Adding script
     template: src=templates/web_monitor.sh.j2 dest=/home/vagrant/web_monitor.sh
+
   - name: Changing perm of "web_monitor.sh, adding "+x"
     become: true
     file: dest=/home/vagrant/web_monitor.sh mode=a+x
+
+  - stat:
+      path: ~/.ssh/id_rsa
+    register: rsa_defined
+
+  - name: Generating ssh key
+    shell: ssh-keygen -q -t rsa -N "" -f ~/.ssh/id_rsa -C ""
+    when: rsa_defined.stat.exists == False 
+
+  - name: Copy ssh public key
+    fetch:
+      src: ~/.ssh/id_rsa.pub
+      dest: ~/web_monitor_rsa.pub
+      flat: yes
+    when: rsa_defined.stat.exists == False 
+
   - name: Adding script to cron
     cron:
       name: "web_monitor"
