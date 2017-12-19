@@ -6,8 +6,8 @@ Vagrant.configure("2") do |config|
   # Sync playbooks folder accross vm and host
   config.vm.synced_folder "playbooks/", "/home/vagrant/playbooks"
 
-  # Sync vms folder accross vm and host
-  config.vm.synced_folder "vms/", "/home/vagrant/vms", create: true
+  # Sync .vdata folder accross vm and host
+  config.vm.synced_folder ".vdata/", "/home/vagrant/.vdata", create: true
 
   # Generate ssh keys
   config.vm.provision "shell", 
@@ -16,7 +16,7 @@ Vagrant.configure("2") do |config|
 
   # Copy ssh public key
   config.vm.provision "shell", 
-    inline: 'cp ~/.ssh/id_rsa.pub ~/vms/admin_rsa.pub', 
+    inline: 'cp ~/.ssh/id_rsa.pub ~/.vdata/admin_rsa.pub', 
     privileged: false
 
   # Install ansible
