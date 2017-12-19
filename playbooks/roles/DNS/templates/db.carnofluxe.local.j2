@@ -10,6 +10,9 @@ $ORIGIN {{ name_zone }}.
 
 @               IN      NS      {{ name_dns_first }}.{{ name_zone }}.
 @               IN      NS      {{ name_dns_second }}
-@               IN      A       {{ ip_webServer }}
-{{ name_dns_first }}            IN      A       {{ ip_dns_first }}
-{{ name_dns_second }}            IN      A       {{ ip_dns_second }}
+@               IN      A       {{ ip_webService }}
+{{ name_dns_first }}            IN      A       {{ ip_PrimaryInfra }}
+{{ name_dns_second }}            IN      A       {{ ip_SecondaryInfra }}
+{{ name_webService }}           IN      A        {{ ip_webService }}
+{{ name_PrimaryInfra }}         IN      A        {{ ip_PrimaryInfra }}
+{{ name_SecondaryInfra }}       IN      A        {{ ip_SecondaryInfra}}

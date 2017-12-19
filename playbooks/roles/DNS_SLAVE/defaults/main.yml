@@ -8,16 +8,22 @@ dns_forward_second: 8.8.4.4
 name_dns_first: ns1
 name_dns_second: ns2
 
+#---- NAME SERVICE ----
+name_webService: webservice
+name_PrimaryInfra: primaryinfra
+name_SecondaryInfra: secondaryinfra
+
+#---- NAME DNS ZONE ----
 name_zone: carnofluxe.local
 
 #---- SUBNETING ----
 subnet_ip_mask: 192.168.10.0/24
-subnet_reverse_ip: 10.168.19
+subnet_reverse_ip: 10.168.192
 
 #---- IP ----
-ip_dns_first: 192.168.10.5
-ip_dns_second: 192.168.10.6
-ip_webServer: 192.168.10.7
-last_ip_digit_dns_first: 5
-last_ip_digit_dns_second: 6
-last_ip_digit_dns_webserver: 7
+ip_PrimaryInfra: 192.168.10.5
+ip_SecondaryInfra: 192.168.10.6
+ip_webService: 192.168.10.10
+last_ip_digit_PrimaryInfra: 5
+last_ip_digit_SecondaryInfra: 6
+last_ip_digit_dns_webService: 10

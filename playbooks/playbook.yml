@@ -31,5 +31,5 @@
   roles:
     - HTTP_SERVER
     #- HTTP_LOGGER
-    - BACKUP
+    #- BACKUP
 ...
