@@ -16,3 +16,4 @@ $ORIGIN {{ name_zone }}.
 {{ name_webservice }}           IN      A        {{ ip_webservice }}
 {{ name_primaryinfra }}         IN      A        {{ ip_primaryinfra }}
 {{ name_secondaryinfra }}       IN      A        {{ ip_secondaryinfra}}
+supervisor                      IN      CNAME        {{ name_webservice }}
