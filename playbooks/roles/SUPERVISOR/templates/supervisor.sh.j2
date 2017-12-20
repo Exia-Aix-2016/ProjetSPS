@@ -30,4 +30,4 @@ DATE=$(date +"%D %T")
 
 echo "$DATE,$SERVER_STATUS,$DNS_STATUS,$WEBSITE_STATUS,$WEBSITE_RESPONSE_TIME" >> supervisor.log.csv
 
-scp supervisor.log.csv vagrant@$SERVER_IP:~/
+scp -qo StrictHostKeyChecking=no supervisor.log.csv vagrant@$SERVER_IP:~/
