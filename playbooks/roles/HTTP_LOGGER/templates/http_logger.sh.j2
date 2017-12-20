@@ -3,6 +3,8 @@
 DATE=$(date -d "1 hour ago"  +"%d/%b/%Y:%H:")
 echo -n > ~/http_logs.csv
 
+echo "DATE,IP,COUNTRY" >> ~/http_logs.csv
+
 while read -r line
 do
     IP=$(echo $line | awk '{ print $1  }')

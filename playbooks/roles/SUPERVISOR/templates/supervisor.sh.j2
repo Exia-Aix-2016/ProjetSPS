@@ -3,6 +3,10 @@
 SERVER_IP={{ webservice_ip }}
 WEBSITE_URL={{ website_url }}
 
+if [ ! -f supervisor.log.csv ]; then
+    echo "DATE,SERVER_STATUS,DNS_STATUS,WEBSITE_STATUS,WEBSITE_RESPONSE_TIME" >> supervisor.log.csv
+fi
+
 ping -c 3 $SERVER_IP > /dev/null
 OUT=$?
 if [ $OUT == 0 ]; then
