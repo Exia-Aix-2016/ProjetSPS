@@ -5,7 +5,7 @@ tar cfz "$name" /var/www/carnofluxe.fr/
 
 ssh 192.168.10.6 mkdir backup
 count_sav=$(ssh 192.168.10.6 ls ~/backup/ | wc -l)
-scp "$name" 192.168.10.6:~/backup/
+scp -qo StrictHostKeyChecking=no "$name" 192.168.10.6:~/backup/
 echo $count_sav
 max_file=8;
 while [ $count_sav -gt $max_file ];
