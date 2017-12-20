@@ -1,17 +1,17 @@
 ---
-  - name: Installation service DHCP.
+  - name: Install dhcp-server.
     become: yes
-    apt: name=isc-dhcp-server state=latest update_cache=yes
+    apt: name=isc-dhcp-server state=latest
 
-  - name: Configuration service DHCP(1/2).
+  - name: Configure dhcp-server (1/2).
     become: yes
     template: src=templates/dhcpd.conf.j2 dest=/etc/dhcp/dhcpd.conf
 
-  - name: Configuration service DHCP(2/2).
+  - name: Configure dhcp-server (2/2).
     become: yes
     template: src=templates/isc-dhcp-server.j2 dest=/etc/default/isc-dhcp-server
 
-  - name: Start Service DHCP.
+  - name: Restart dhcp-server.
     become: yes
     service: name=isc-dhcp-server state=restarted
 ...

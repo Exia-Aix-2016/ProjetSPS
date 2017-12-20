@@ -1,22 +1,22 @@
 ---
-  - name: Installation HTTP_SERVER.
+  - name: Install apache2.
     become: yes
-    apt: name=apache2 state=latest update_cache=yes
+    apt: name=apache2 state=latest
 
-  - name: Configuration HTTP_SERVER (1/4).
+  - name: Configure apache2 (1/4).
     become: yes
     template: src=templates/apache2.conf.j2 dest=/etc/apache2/apache2.conf
 
-  - name: Configuration HTTP_SERVER (2/4).
+  - name: Configure apache2 (2/4).
     become: yes
     template: src=templates/ports.conf.j2 dest=/etc/apache2/ports.conf
 
-  - name: Configuration HTTP_SERVER (3/4).
+  - name: Configure apache2 (3/4).
     become: yes
     template: src=templates/vhost.conf.j2 dest=/etc/apache2/sites-available/{{ item.name_server }}.conf
     with_items: "{{ websites }}"
 
-  - name: Configuration HTTP_SERVER (4/4).
+  - name: Configure apache2 (4/4).
     become: yes
     file:
       src: /etc/apache2/sites-available/{{ item.name_server }}.conf
@@ -24,18 +24,18 @@
       state: link
     with_items: "{{ websites }}"
 
-  - name: Create website directory
+  - name: Create websites directory.
     become: yes
     file:
       path: /var/www/{{ item.name_server }}
       state: directory
     with_items: "{{ websites }}"
 
-  - name: Copy the market website.
+  - name: Add the market website files.
     become: yes
     copy: src=index.html dest=/var/www/{{ websites[0].name_server }}/index.html
 
-  - name: Start HTTP_SERVER.
+  - name: Restart apache2.
     become: yes
     service: name=apache2 state=restarted
  

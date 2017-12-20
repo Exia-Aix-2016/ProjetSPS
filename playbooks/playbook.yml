@@ -10,6 +10,9 @@
     - name: Configuration DNS.
       become: yes
       template: src=templates/resolv.conf.j2 dest=/etc/resolv.conf
+    - name: Update packages list.
+      become: yes
+      apt: update_cache=yes 
 
 #--------------INSTALLATION PRIMARYINFRA--------------
 - hosts: PRIMARYINFRA
@@ -35,7 +38,7 @@
 - hosts: WEBSERVICE
   remote_user: vagrant
   tasks:
-    - name: Add ssh key of supervisor
+    - name: Authorize supervisor key.
       authorized_key:
         user: vagrant
         state: present

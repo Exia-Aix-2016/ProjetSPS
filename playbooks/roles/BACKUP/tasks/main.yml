@@ -1,12 +1,12 @@
 ---
-- name: Install backup script
+- name: Add script.
   template: src=templates/backup.sh.j2 dest=/home/vagrant/backup.sh
 
-- name: Changing perm of "backup.sh, adding "+x"
+- name: Make the script executable.
   become: yes
   file: dest=/home/vagrant/backup.sh mode=a+x
 
-- name: Adding script backup.sh
+- name: Add script to crontab.
   cron:
     name: "backup"
     special_time: weekly

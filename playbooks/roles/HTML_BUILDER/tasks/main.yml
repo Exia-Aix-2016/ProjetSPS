@@ -1,10 +1,10 @@
 ---
   #---- INSTALLATION HTML_BUILDER ----
-  - name: Installation python-setuptools
+  - name: Install python-setuptools.
     become: yes
-    apt: name=python-setuptools state=latest update_cache=yes
+    apt: name=python-setuptools state=latest
 
-  - name: Cloning csv2html
+  - name: Clone csv2html.
     git:
       repo: 'https://github.com/dbohdan/csv2html.git'
       dest: ~/csv2html
@@ -15,14 +15,14 @@
     args:
       chdir: csv2html/
 
-  - name: Adding script
+  - name: Add script.
     template: src=templates/html_builder.sh.j2 dest=/home/vagrant/html_builder.sh
 
-  - name: Changing perm of "html_builder.sh, adding "+x"
+  - name: Make the script executable.
     become: true
     file: dest=/home/vagrant/html_builder.sh mode=a+x
 
-  - name: Adding script to cron
+  - name: Add script to crontab.
     cron:
       name: "html_builder"
       minute: "*/5"
