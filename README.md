@@ -12,7 +12,3 @@ address 192.168.10.2
 netmask 255.255.255.0
 gateway 192.168.10.1
 ```
-And add google dns in `/etc/resolv.conf`
-```
-nameserver 8.8.8.8
-```
