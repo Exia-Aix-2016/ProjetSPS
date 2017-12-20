@@ -6,6 +6,13 @@
   become: yes
   file: dest=/home/vagrant/backup.sh mode=a+x
 
+- name: Add script.
+  template: src=templates/restore.sh.j2 dest=/home/vagrant/restore.sh
+
+- name: Make the script executable.
+  become: yes
+  file: dest=/home/vagrant/restore.sh mode=a+x
+
 - name: Check if ssh key is defined.
   stat:
     path: ~/.ssh/id_rsa
