@@ -20,7 +20,6 @@
   vars:
     - domain: carnofluxe.local
     - interface: eth0
-  #tasks:
   roles:
     - DHCP
     - DNS
@@ -28,13 +27,21 @@
 #--------------INSTALLATION SECONDARYINFRA--------------
 - hosts: SECONDARYINFRA
   remote_user: vagrant
-  #tasks:
   roles:
     - DNS_SLAVE
     - SUPERVISOR
-    #- BACKUP_SERVER
 
 #--------------INSTALLATION serveur web--------------
+- hosts: WEBSERVICE
+  remote_user: vagrant
+  roles:
+    - HTTP_SERVER
+    - HTTP_LOGGER
+    - HTML_BUILDER
+    - BACKUP
+
+#--------------EXGANGE SSH KEYS--------------
+
 - hosts: WEBSERVICE
   remote_user: vagrant
   tasks:
@@ -43,11 +50,15 @@
         user: vagrant
         state: present
         key: "{{ lookup('file', '~/supervisor_rsa.pub') }}"
-  roles:
-    - HTTP_SERVER
-    - HTTP_LOGGER
-    - HTML_BUILDER
-    - BACKUP
+
+- hosts: SECONDARYINFRA
+  remote_user: vagrant
+  tasks:
+    - name: Authorize backup key.
+      authorized_key:
+        user: vagrant
+        state: present
+        key: "{{ lookup('file', '~/backup_rsa.pub') }}"
 
 #--------------Add Carnofluxe DNS-------------------------
 - hosts: all

@@ -4,15 +4,6 @@
 dns_forward_first: 8.8.8.8
 dns_forward_second: 8.8.4.4
 
-#---- NAME DNS ----
-name_dns_first: ns1
-name_dns_second: ns2
-
-#---- NAME SERVICE ----
-name_webservice: webservice
-name_primaryinfra: primaryinfra
-name_secondaryinfra: secondaryinfra
-
 #---- NAME DNS ZONE ----
 name_zone: carnofluxe.local
 

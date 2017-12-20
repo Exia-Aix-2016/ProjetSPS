@@ -24,7 +24,6 @@
       src: ~/.ssh/id_rsa.pub
       dest: ~/supervisor_rsa.pub
       flat: yes
-    when: rsa_defined.stat.exists == False 
 
   - name: Add script to crontab.
     cron:

@@ -6,6 +6,21 @@
   become: yes
   file: dest=/home/vagrant/backup.sh mode=a+x
 
+- name: Check if ssh key is defined.
+  stat:
+    path: ~/.ssh/id_rsa
+  register: rsa_defined
+
+- name: Generate ssh key.
+  shell: ssh-keygen -q -t rsa -N "" -f ~/.ssh/id_rsa -C ""
+  when: rsa_defined.stat.exists == False 
+
+- name: Copy ssh public key.
+  fetch:
+    src: ~/.ssh/id_rsa.pub
+    dest: ~/backup_rsa.pub
+    flat: yes
+
 - name: Add script to crontab.
   cron:
     name: "backup"
