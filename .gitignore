@@ -1,0 +1,5 @@
+.vagrant/
+.vdata/
+playbooks/playbook\.retry
+.vms/
+vms/

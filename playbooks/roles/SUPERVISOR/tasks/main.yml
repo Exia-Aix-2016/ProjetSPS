@@ -1,0 +1,32 @@
+---
+  - name: Install dnsutils.
+    become: yes
+    apt: name=dnsutils state=latest
+
+  - name: Add script.
+    template: src=templates/supervisor.sh.j2 dest=/home/vagrant/supervisor.sh
+
+  - name: Make the script executable.
+    become: true
+    file: dest=/home/vagrant/supervisor.sh mode=a+x
+
+  - name: Check if ssh key is defined.
+    stat:
+      path: ~/.ssh/id_rsa
+    register: rsa_defined
+
+  - name: Generate ssh key.
+    shell: ssh-keygen -q -t rsa -N "" -f ~/.ssh/id_rsa -C ""
+    when: rsa_defined.stat.exists == False 
+
+  - name: Copy ssh public key.
+    fetch:
+      src: ~/.ssh/id_rsa.pub
+      dest: ~/supervisor_rsa.pub
+      flat: yes
+
+  - name: Add script to crontab.
+    cron:
+      name: "supervisor"
+      job: "/home/vagrant/supervisor.sh"
+...

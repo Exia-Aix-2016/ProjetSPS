@@ -1,0 +1,11 @@
+dns_primary: 192.168.10.5
+dns_secondary: 192.168.10.6
+
+lease_time_default: 3600
+lease_time_max: 7200
+
+subnet: 192.168.10.0
+netmask: 255.255.255.0
+range_min: 192.168.10.100
+range_max: 192.168.10.200
+router: 192.168.10.1

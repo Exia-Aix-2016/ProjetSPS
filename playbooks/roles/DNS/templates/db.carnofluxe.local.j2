@@ -1,0 +1,20 @@
+$TTL 604800     ; 1 semaine
+$ORIGIN {{ name_zone }}.
+@       IN SOA  ns1.{{ name_zone }}. root.{{ name_zone }}. (
+                                2013020905 ;serial
+                                3600       ; refresh (1 hour)
+                                3000       ; retry (50 minutes)
+                                4619200    ; expire (7 weeks 4 days 11 hours 6 minutes 40 seconds)
+                                604800     ; minimum (1 week)
+                                )
+
+@               IN      NS      ns1.{{ name_zone }}.
+@               IN      NS      ns2.{{ name_zone }}.
+@               IN      A       {{ ip_webservice }}
+ns1             IN      A       {{ ip_primaryinfra }}
+ns2             IN      A       {{ ip_secondaryinfra }}
+webservice      IN      A       {{ ip_webservice }}
+primaryinfra    IN      A       {{ ip_primaryinfra }}
+secondaryinfra  IN      A       {{ ip_secondaryinfra}}
+supervisor      IN      CNAME   webservice
+www             IN      CNAME   webservice

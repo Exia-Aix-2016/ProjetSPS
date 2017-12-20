@@ -1,0 +1,6 @@
+#!/bin/bash
+
+NAMEFILE=$(ssh -qo StrictHostKeyChecking=no 192.168.10.6 ls -t ~/backup/ | head -n1)
+
+scp -qo StrictHostKeyChecking=no 192.168.10.6:~/backup/$NAMEFILE ~/
+sudo tar -xvf $NAMEFILE -C /

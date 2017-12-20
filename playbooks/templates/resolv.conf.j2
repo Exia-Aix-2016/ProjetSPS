@@ -1,0 +1,5 @@
+domain attlocal.net
+search attlocal.net
+{% for d in dns %}
+nameserver {{ d }}
+{% endfor %}

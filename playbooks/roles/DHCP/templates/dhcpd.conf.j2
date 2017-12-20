@@ -1,0 +1,23 @@
+
+# option definitions common to all supported networks...
+option domain-name "{{ domain }}";
+option domain-name-servers {{ dns_primary }}, {{ dns_secondary }};
+
+default-lease-time {{ lease_time_default }};
+max-lease-time {{ lease_time_max }};
+
+# The ddns-updates-style parameter controls whether or not the server will
+# attempt to do a DNS update when a lease is confirmed. We default to the
+# behavior of the version 2 packages ('none', since DHCP v2 didn't
+# have support for DDNS.)
+ddns-update-style none;
+
+subnet {{ subnet }} netmask {{ netmask }}{
+  range {{ range_min }} {{ range_max }};
+  option domain-name-servers {{ dns_primary }}, {{ dns_secondary }};
+  option domain-name "{{ domain }}";
+  option routers {{ router }};
+#  option broadcast-address 10.5.5.31;
+#  default-lease-time 600;
+#  max-lease-time 7200;
+}

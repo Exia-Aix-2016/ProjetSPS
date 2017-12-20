@@ -1,0 +1,74 @@
+---
+#--------------Add Google DNS-------------------------
+- hosts: all
+  remote_user: vagrant
+  vars:
+    - dns:
+      - 8.8.8.8
+      - 8.8.4.4
+  tasks:
+    - name: Configuration DNS.
+      become: yes
+      template: src=templates/resolv.conf.j2 dest=/etc/resolv.conf
+    - name: Update packages list.
+      become: yes
+      apt: update_cache=yes 
+
+#--------------INSTALLATION PRIMARYINFRA--------------
+- hosts: PRIMARYINFRA
+  remote_user: vagrant
+  vars:
+    - domain: carnofluxe.local
+    - interface: eth0
+  roles:
+    - DHCP
+    - DNS
+
+#--------------INSTALLATION SECONDARYINFRA--------------
+- hosts: SECONDARYINFRA
+  remote_user: vagrant
+  roles:
+    - DNS_SLAVE
+    - SUPERVISOR
+
+#--------------INSTALLATION serveur web--------------
+- hosts: WEBSERVICE
+  remote_user: vagrant
+  roles:
+    - HTTP_SERVER
+    - HTTP_LOGGER
+    - HTML_BUILDER
+    - BACKUP
+
+#--------------EXGANGE SSH KEYS--------------
+
+- hosts: WEBSERVICE
+  remote_user: vagrant
+  tasks:
+    - name: Authorize supervisor key.
+      authorized_key:
+        user: vagrant
+        state: present
+        key: "{{ lookup('file', '~/supervisor_rsa.pub') }}"
+
+- hosts: SECONDARYINFRA
+  remote_user: vagrant
+  tasks:
+    - name: Authorize backup key.
+      authorized_key:
+        user: vagrant
+        state: present
+        key: "{{ lookup('file', '~/backup_rsa.pub') }}"
+
+#--------------Add Carnofluxe DNS-------------------------
+- hosts: all
+  remote_user: vagrant
+  vars:
+    - dns:
+      - 192.168.10.5
+      - 192.168.10.6
+  tasks:
+    - name: Configuration DNS.
+      become: yes
+      template: src=templates/resolv.conf.j2 dest=/etc/resolv.conf
+...

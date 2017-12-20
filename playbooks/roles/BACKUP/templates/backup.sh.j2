@@ -1,0 +1,21 @@
+#!/bin/bash
+
+MAX_FILE=8;
+NAME=carnofluxe.fr-$(date +%Y-%m-%d).tar.gz
+
+tar cfz "$NAME" -C / var/www/carnofluxe.fr
+
+ssh -qo StrictHostKeyChecking=no 192.168.10.6 mkdir -p backup
+COUNT_SAVE=$(ssh 192.168.10.6 ls ~/backup/ | wc -l)
+
+scp -qo StrictHostKeyChecking=no "$NAME" 192.168.10.6:~/backup/
+
+while [ $COUNT_SAVE -gt $MAX_FILE ];
+do
+
+    COUNT_SAVE=$(ssh 192.168.10.6 ls ~/backup/ | wc -l)
+
+    NAMEFILE=$(ssh 192.168.10.6 ls -1 ~/backup/ | head -1)
+    ssh -qo StrictHostKeyChecking=no 192.168.10.6 rm -f ~/backup/"$NAMEFILE"
+
+done
